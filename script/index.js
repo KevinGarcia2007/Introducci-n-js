@@ -1,9 +1,7 @@
 
 function validar(){
     let Pnombre=document.getElementById("PrimerNombre");
-    let Snombre=document.getElementById("SegundoNombre");
     let Papellido=document.getElementById("PrimerApellido");
-    let Sapellido=document.getElementById("SegundoApellido"); 
     let Identificacion=document.getElementById("id"); 
     let Contacto=document.getElementById("contacto"); 
     let correo=document.getElementById("email");
@@ -20,27 +18,12 @@ function validar(){
           });
         return false;
     }
-    else if (Snombre.value==null || Snombre.value==""){
-        Swal.fire({
-            icon: "warning",
-            title: "Oops...",
-            text: "El Segundo nombre es obligatorio!",
-          });
-        return false;
-        }
+
     else if(Papellido.value==null || Papellido.value==""){
         Swal.fire({
             icon: "warning",
             title: "Oops...",
             text: "El primer apellido es obligatorio!",
-          });
-        return false;
-    }
-    else if(Sapellido.value==null || Sapellido.value==""){
-        Swal.fire({
-            icon: "warning",
-            title: "Oops...",
-            text: "El segundo apellido es obligatorio!",
           });
         return false;
     }
