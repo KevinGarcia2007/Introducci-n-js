@@ -1,10 +1,9 @@
 body {
     background-color: #f8f9fa;
-    gap: 7px;
+    margin:auto;
 }
 h1{
     margin-top:auto;
-    gap:7px;
 }
 
 .container {

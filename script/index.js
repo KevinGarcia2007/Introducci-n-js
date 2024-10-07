@@ -9,11 +9,12 @@ function validar(){
     let correo=document.getElementById("email");
     let contrasena=document.getElementById("contrasena");
     let confirmarContrasena=document.getElementById("confirmarContrasena");
-
+    let opciones=document.getElementsByName("ElGenero");
+    let seleccion= false;
 
     if (Pnombre.value==null || Pnombre.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "El primer nombre es obligatorio!",
           });
@@ -21,7 +22,7 @@ function validar(){
     }
     else if (Snombre.value==null || Snombre.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "El Segundo nombre es obligatorio!",
           });
@@ -29,7 +30,7 @@ function validar(){
         }
     else if(Papellido.value==null || Papellido.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "El primer apellido es obligatorio!",
           });
@@ -37,15 +38,17 @@ function validar(){
     }
     else if(Sapellido.value==null || Sapellido.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "El segundo apellido es obligatorio!",
           });
         return false;
     }
+
+
     else if(Identificacion.value==null || Identificacion.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "La identificación es obligatoria!",
           });
@@ -53,7 +56,7 @@ function validar(){
     }
     else if(Contacto.value==null || Contacto.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "el número de teléfono es obligatorio!",
           });
@@ -61,7 +64,7 @@ function validar(){
     }
     else if(correo.value==null || correo.value==""){
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "el correo es obligatorio!",
           });
@@ -69,7 +72,7 @@ function validar(){
     }
     if (contrasena.value == null || contrasena.value == "") {
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "La contraseña es obligatoria!",
         });
@@ -84,7 +87,7 @@ function validar(){
     }
     if (!confirmarContrasena.value) {
         Swal.fire({
-            icon: "info",
+            icon: "warning",
             title: "Oops...",
             text: "Confirmar la contraseña es obligatorio!",
         });
@@ -98,8 +101,23 @@ function validar(){
         });
         return false;
     }
-    else{
-        alert ("Enviado!");
-        return true;
+    else {
+        for (let i = 0; i < opciones.length; i++) {
+            if (opciones[i].checked) {
+                seleccion = true;
+                break;
+            }
+        }
+        if (!seleccion) {
+            Swal.fire({
+                icon: "warning",
+                title: "Oops...",
+                text: "Debe seleccionar un género!",
+            });
+            return false;
         }
     }
+
+    alert("Enviado!");
+    return true;
+}
