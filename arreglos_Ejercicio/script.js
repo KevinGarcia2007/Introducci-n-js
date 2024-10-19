@@ -26,6 +26,42 @@ function validar(event) {
     return true;  
 }
 
+function numeroATexto(promedio) {
+    let entero = Math.floor(promedio);
+    let decimal = Math.round((promedio - entero) * 10);
+
+    let textoEntero;
+    switch (entero) {
+        case 0: textoEntero = "cero"; break;
+        case 1: textoEntero = "uno"; break;
+        case 2: textoEntero = "dos"; break;
+        case 3: textoEntero = "tres"; break;
+        case 4: textoEntero = "cuatro"; break;
+        case 5: textoEntero = "cinco"; break;
+        case 6: textoEntero = "seis"; break;
+        case 7: textoEntero = "siete"; break;
+        case 8: textoEntero = "ocho"; break;
+        case 9: textoEntero = "nueve"; break;
+        case 10: textoEntero = "diez"; break;
+        default: textoEntero = ""; 
+    }
+    let textoDecimal;
+    switch (decimal) {
+        case 0: textoDecimal = "cero"; break;
+        case 1: textoDecimal = "uno"; break;
+        case 2: textoDecimal = "dos"; break;
+        case 3: textoDecimal = "tres"; break;
+        case 4: textoDecimal = "cuatro"; break;
+        case 5: textoDecimal = "cinco"; break;
+        case 6: textoDecimal = "seis"; break;
+        case 7: textoDecimal = "siete"; break;
+        case 8: textoDecimal = "ocho"; break;
+        case 9: textoDecimal = "nueve"; break;
+        default: textoDecimal = ""; 
+    }
+
+    return ` ${textoEntero} punto ${textoDecimal}`;
+}
 
 
 function mostrarDatos(documento, carrera) {
@@ -80,9 +116,9 @@ function mostrarDatos(documento, carrera) {
             let Nota2 = parseFloat(datos[i][5]);
             let Nota3 = parseFloat(datos[i][6]);
             let Nota4 = parseFloat(datos[i][7]);
-    
             let Promedio = ((Nota1 + Nota2 + Nota3 + Nota4) / 4).toFixed(1);
-    
+            let promedioTexto = numeroATexto(Promedio);
+
             document.getElementById("resultado").classList.remove("d-none");
             let tbody = document.getElementById("tablaResultados").getElementsByTagName("tbody")[0];
             tbody.innerHTML = "";  
@@ -91,11 +127,12 @@ function mostrarDatos(documento, carrera) {
                     <td>${nombre}</td>
                     <td>${carrera}</td>
                     <td>${semestre}</td>
-                    <td>${Nota1.toFixed(1)}</td> <!-- Mostrar las notas con un decimal -->
+                    <td>${Nota1.toFixed(1)}</td> 
                     <td>${Nota2.toFixed(1)}</td>
                     <td>${Nota3.toFixed(1)}</td>
                     <td>${Nota4.toFixed(1)}</td>
-                    <td>${Promedio}</td> <!-- Mostrar el promedio con un decimal -->
+                    <td>${Promedio}</td> 
+                     <td>${promedioTexto}</td>
                 </tr>
             `;
             encontrado = true;
