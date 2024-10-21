@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src="script.js"></script>
+	<style type="text/css">
+		fieldset {
+			background-color: #f4f1ed ;
+			color: firebrick;
+			border-color: darkgoldenrod;
+			border: 9px groove (internal value);
+			border-radius: 5px;
+			width: 400px;
+			margin: auto;
+		}
+
+		legend {
+			color: darkblue;
+			font-weight: bold;
+		}
+
+	</style>
+</head>
+<body>
+	<fieldset>
+		<legend>Datos personales</legend>
+			Nombre y Apellido: <input type="text" size="30" name="nombre" id="nombre"><br><br>
+			Su Edad: <input type="text" name="edad" id="edad" onblur="VerifiqueEdad()"><br><br>
+			<input type="button" id="miboton" value="Verificar" onclick="Revisar()">
+	</fieldset>
+    <script src="script.js"></script>
+</body>
+</html>

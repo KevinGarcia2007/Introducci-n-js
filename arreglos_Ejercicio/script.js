@@ -28,7 +28,7 @@ function validar(event) {
 
 function numeroATexto(promedio) {
     let entero = Math.floor(promedio);
-    let decimal = Math.round((promedio - entero) * 10);
+    let decimal = Math.floor((promedio - entero) * 10);
 
     let textoEntero;
     switch (entero) {
@@ -60,13 +60,13 @@ function numeroATexto(promedio) {
         default: textoDecimal = ""; 
     }
 
-    return ` ${textoEntero} punto ${textoDecimal}`;
+    return `${textoEntero} punto ${textoDecimal}`;
 }
 
 
 function mostrarDatos(documento, carrera) {
     let datos = [
-        ["51662369","Sandra Milena Castellanos Marín","Medicina","VI","3.5","4.0","3.3","3.5"],
+        ["51662369","Sandra Milena Castellanos Marín","Medicina","VI","1.9","1.9","4.5","3.6"],
         ["80223220","Luis Andrés Montoya Montoya","Ingeniería de Telecomunicaciones","IV","3.0","3.3","4.2","4.5"],
         ["79444555","Francisco Martínez Marin","Ingeniería de Alimentos","III","3.4","4.5","4.4","3.0"],
         ["79001003","Luis Francisco Castañeda Roa","Ingeniería de Sistemas","VIII","3.3","3.4","4.5","4.4"],
@@ -83,7 +83,7 @@ function mostrarDatos(documento, carrera) {
         ["1012353083","Germán Dario Rodríguez Baez","Ingeniería Mecánica","II","2.5","4.6","3.4","4.6"],
         ["1030630231","Diego Fernando Giraldo Romero","Ingeniería de Petróleo","III","3.6","3.4","3.5","4.5"],
         ["1020765332","Luz Herminda Fonseca Daza","Psicología","VI","4.0","4.1","3.9","4.5"],
-        ["1022357137","Rhonald Dahian Jiménez García","Ingeniería Civil","VI","3.5","4.0","3.3","3.5"],
+        ["1022357137","Rhonald Dahian Jiménez García","Ingeniería Civil","VI","1.9","1.6","3.3","1.1"],
         ["52263227","Edgar Andrés Bejarano Pérez","Ingeniería Civil","IV","3.0","3.3","4.2","4.5"],
         ["1013579638","Diego Fernando Bautista Gómez","Ingeniería Civil","III","3.4","4.5","4.4","3.0"],
         ["1030617979","Luis Alberto Jaime Hernández","Ingeniería  de Sistemas","II","4.0","4.1","3.9","4.5"],
@@ -116,10 +116,12 @@ function mostrarDatos(documento, carrera) {
             let Nota2 = parseFloat(datos[i][5]);
             let Nota3 = parseFloat(datos[i][6]);
             let Nota4 = parseFloat(datos[i][7]);
-            let Promedio = ((Nota1 + Nota2 + Nota3 + Nota4) / 4).toFixed(1);
+            
+            let Promedio = (Nota1 + Nota2 + Nota3 + Nota4) / 4;
+            
             let promedioTexto = numeroATexto(Promedio);
 
-            document.getElementById("resultado").classList.remove("d-none");
+                document.getElementById("resultado").classList.remove("d-none");
             let tbody = document.getElementById("tablaResultados").getElementsByTagName("tbody")[0];
             tbody.innerHTML = "";  
             tbody.innerHTML = `
@@ -131,8 +133,8 @@ function mostrarDatos(documento, carrera) {
                     <td>${Nota2.toFixed(1)}</td>
                     <td>${Nota3.toFixed(1)}</td>
                     <td>${Nota4.toFixed(1)}</td>
-                    <td>${Promedio}</td> 
-                     <td>${promedioTexto}</td>
+                    <td>${Math.floor(Promedio*10)/10}</td>
+                    <td>${promedioTexto}</td>
                 </tr>
             `;
             encontrado = true;
@@ -148,4 +150,4 @@ function mostrarDatos(documento, carrera) {
             text: "No se encontraron datos con ese número de documento y carrera.",
         });
     }
-}    
+}
