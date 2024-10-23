@@ -1,5 +1,6 @@
 
-function validar(){
+function validar(event){
+    event.preventDefault();
     let Pnombre=document.getElementById("PrimerNombre");
     let Papellido=document.getElementById("PrimerApellido");
     let Identificacion=document.getElementById("id"); 
@@ -100,7 +101,62 @@ function validar(){
             return false;
         }
     }
+    Swal.fire({
+        icon: "success",
+        title: "Terminado",
+        text: "Todo salió bien :D!",
+    }).then(() => {
+        location.reload(); 
+    });
 
-    alert("Enviado!");
     return true;
 }
+function revisar() {
+    let identificacion = document.getElementById("id");
+    let contacto = document.getElementById("contacto");
+    let Pnombre = document.getElementById("PrimerNombre");
+
+    if (isNaN(identificacion.value)) {
+        alert("Identificación No Válida. Debe ser un número.");
+        identificacion.focus();
+        identificacion.value = "";
+    }
+
+    else if (isNaN(contacto.value)) {
+        alert("Número de Contacto no válido. Debe ser un número.");
+        contacto.focus();
+        contacto.value = "";
+    }
+}
+function validarNombre() {
+    let primerNombre = document.getElementById("PrimerNombre").value;
+    let segundoNombre = document.getElementById("SegundoNombre").value;
+    let primerApellido = document.getElementById("PrimerApellido").value;
+    let segundoApellido = document.getElementById("SegundoApellido").value;
+
+    if (primerNombre.trim() === "" || !isNaN(primerNombre)) {
+        alert("El Primer Nombre no es válido. Debe contener texto.");
+        PrimerNombre.focus();
+        PrimerNombre.value = "hola";
+        return;
+    }
+    else if (segundoNombre.trim() === "" || !isNaN(segundoNombre)) {
+        alert("El Segundo Nombre no es válido. Debe contener texto.");
+        SegundoNombre.focus();
+        SegundoNombre.value = "hola";
+        return;
+    }
+    else if (primerApellido.trim() === "" || !isNaN(primerApellido)) {
+        alert("El Primer Apellido no es válido. Debe contener texto.");
+        PrimerApellido.focus();
+        PrimerApellido.value = "hola";
+        return;
+    }
+    else if (segundoApellido.trim() === "" || !isNaN(segundoApellido)) {
+        alert("El Segundo Apellido no es válido. Debe contener texto.");
+        SegundoApellido.focus();
+        SegundoApellido.value = "hola";
+        return;
+    }
+
+}   
