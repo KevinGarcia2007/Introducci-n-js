@@ -13,60 +13,44 @@ function validar(event) {
         return false;
     }
 
-    if (carrera === "" || carrera == null) {
-        Swal.fire({
-            icon: "warning",
-            title: "Oops...",
-            text: "Debe ingresar su carrera",
-        });
-        return false;
-    }
-
-    mostrarDatos(documento, carrera);
+    mostrarDatos(documento, carrera); 
     return true;  
 }
 
-function numeroATexto(promedio) {
-    let entero = Math.floor(promedio);
-    let decimal = Math.floor((promedio - entero) * 10);
-
-    let textoEntero;
-    switch (entero) {
-        case 0: textoEntero = "cero"; break;
-        case 1: textoEntero = "uno"; break;
-        case 2: textoEntero = "dos"; break;
-        case 3: textoEntero = "tres"; break;
-        case 4: textoEntero = "cuatro"; break;
-        case 5: textoEntero = "cinco"; break;
-        case 6: textoEntero = "seis"; break;
-        case 7: textoEntero = "siete"; break;
-        case 8: textoEntero = "ocho"; break;
-        case 9: textoEntero = "nueve"; break;
-        case 10: textoEntero = "diez"; break;
-        default: textoEntero = ""; 
+function convertirCastellanoDecimal(x) {
+    let palabra;
+    switch (x) {
+        case 0: palabra = "cero"; break;
+        case 1: palabra = "uno"; break;
+        case 2: palabra = "dos"; break;
+        case 3: palabra = "tres"; break;
+        case 4: palabra = "cuatro"; break;
+        case 5: palabra = "cinco"; break;
+        case 6: palabra = "seis"; break;
+        case 7: palabra = "siete"; break;
+        case 8: palabra = "ocho"; break;
+        case 9: palabra = "nueve"; break;
+        default: palabra = "solo valores entre 0 y 9"; break;
     }
-    let textoDecimal;
-    switch (decimal) {
-        case 0: textoDecimal = "cero"; break;
-        case 1: textoDecimal = "uno"; break;
-        case 2: textoDecimal = "dos"; break;
-        case 3: textoDecimal = "tres"; break;
-        case 4: textoDecimal = "cuatro"; break;
-        case 5: textoDecimal = "cinco"; break;
-        case 6: textoDecimal = "seis"; break;
-        case 7: textoDecimal = "siete"; break;
-        case 8: textoDecimal = "ocho"; break;
-        case 9: textoDecimal = "nueve"; break;
-        default: textoDecimal = ""; 
-    }
-
-    return `${textoEntero} punto ${textoDecimal}`;
+    return palabra;
 }
 
+function convertirDecimalATexto(promedio) {
+    let entero = Math.floor(promedio);
+    let decimal = Math.floor((promedio - entero) * 10); 
+    let textoEntero = convertirCastellanoDecimal(entero);
+    let textoDecimal = "";
+
+    if (decimal > 0) {
+        textoDecimal = " punto " + convertirCastellanoDecimal(decimal);
+    }
+
+    return textoEntero + textoDecimal;
+}
 
 function mostrarDatos(documento, carrera) {
     let datos = [
-        ["51662369","Sandra Milena Castellanos Marín","Medicina","VI","1.9","1.9","4.5","3.6"],
+        ["51662369","Sandra Milena Castellanos Marín","Medicina","VI","2.6","2.6","3.4","1.5"],
         ["80223220","Luis Andrés Montoya Montoya","Ingeniería de Telecomunicaciones","IV","3.0","3.3","4.2","4.5"],
         ["79444555","Francisco Martínez Marin","Ingeniería de Alimentos","III","3.4","4.5","4.4","3.0"],
         ["79001003","Luis Francisco Castañeda Roa","Ingeniería de Sistemas","VIII","3.3","3.4","4.5","4.4"],
@@ -105,23 +89,21 @@ function mostrarDatos(documento, carrera) {
         ["1030611565","Mónica Andrea Plaza Bernal","Medicina","IV","3.6","3.8","4.8","4.0"]
     ];
     
-    
     let encontrado = false;
     for (let i = 0; i < datos.length; i++) {
         if (datos[i][0] === documento && datos[i][2].toLowerCase() === carrera.toLowerCase()) {
             let nombre = datos[i][1];
             let semestre = datos[i][3];
-    
+
             let Nota1 = parseFloat(datos[i][4]);
             let Nota2 = parseFloat(datos[i][5]);
             let Nota3 = parseFloat(datos[i][6]);
             let Nota4 = parseFloat(datos[i][7]);
             
             let Promedio = (Nota1 + Nota2 + Nota3 + Nota4) / 4;
-            
-            let promedioTexto = numeroATexto(Promedio);
+            let promedioTexto = convertirDecimalATexto(Promedio); 
 
-                document.getElementById("resultado").classList.remove("d-none");
+            document.getElementById("resultado").classList.remove("d-none");
             let tbody = document.getElementById("tablaResultados").getElementsByTagName("tbody")[0];
             tbody.innerHTML = "";  
             tbody.innerHTML = `
@@ -133,7 +115,7 @@ function mostrarDatos(documento, carrera) {
                     <td>${Nota2.toFixed(1)}</td>
                     <td>${Nota3.toFixed(1)}</td>
                     <td>${Nota4.toFixed(1)}</td>
-                    <td>${Math.floor(Promedio*10)/10}</td>
+                    <td>${Math.floor(Promedio * 10) / 10}</td>
                     <td>${promedioTexto}</td>
                 </tr>
             `;
@@ -150,4 +132,17 @@ function mostrarDatos(documento, carrera) {
             text: "No se encontraron datos con ese número de documento y carrera.",
         });
     }
+}
+
+function convertirDecimalATexto(promedio) {
+    let entero = Math.floor(promedio);
+    let decimal = promedio - entero;
+    let textoDecimal = "";
+
+    if (decimal > 0) {
+        let primerDecimal = Math.floor(decimal * 10); 
+        textoDecimal = " punto " + convertirCastellanoDecimal(primerDecimal);
+    }
+
+    return convertirCastellanoDecimal(entero) + textoDecimal;
 }
