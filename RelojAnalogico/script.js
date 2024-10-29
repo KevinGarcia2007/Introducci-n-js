@@ -64,15 +64,6 @@ function ajustarReloj(hora, minuto, segundo) {
     let gradosMinutoSegundo = Math.abs(minutoAngle - segundoAngle);
     let gradosHoraSegundo = Math.abs(horaAngle - segundoAngle);
 
-    if (gradosHoraMinuto > 180) {
-        gradosHoraMinuto = 360 - gradosHoraMinuto;
-    }
-    if (gradosMinutoSegundo > 180) {
-        gradosMinutoSegundo = 360 - gradosMinutoSegundo;
-    }
-    if (gradosHoraSegundo > 180) {
-        gradosHoraSegundo = 360 - gradosHoraSegundo;
-    }
 
     infoGrados.innerHTML = `
         Grados entre Hora y Minuto: ${gradosHoraMinuto.toFixed(2)}° <br>
